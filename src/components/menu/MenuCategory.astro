@@ -1,0 +1,39 @@
+---
+import type { MenuCategory as MenuCategoryType } from '../../data/menu';
+import SectionTitle from '../common/SectionTitle.astro';
+import MenuItem from './MenuItem.astro';
+
+interface Props {
+	category: MenuCategoryType;
+}
+
+const { category } = Astro.props;
+---
+
+<section
+	id={category.id}
+	class="menu-category-anchor mb-6 break-inside-avoid last:mb-0"
+	aria-labelledby={`${category.id}-heading`}
+>
+	<div
+		data-category-section
+		data-category-id={category.id}
+		class="category-section-card group/card relative overflow-hidden rounded-3xl border border-amber-900/40 bg-gradient-to-br from-zinc-900/85 via-zinc-950/90 to-zinc-950 p-5 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.65)] ring-1 ring-inset ring-white/[0.03] transition-[border-color,box-shadow] hover:border-amber-800/50 hover:shadow-[0_28px_70px_-28px_rgba(251,191,36,0.08)] md:p-7"
+	>
+		<div
+			class="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-amber-500/[0.06] blur-3xl transition-opacity group-hover/card:opacity-90"
+			aria-hidden="true"
+		>
+		</div>
+		<SectionTitle title={category.title} categoryId={category.id} id={`${category.id}-heading`} />
+		<ul class="relative divide-y divide-amber-950/50">
+			{
+				category.items.map((item) => (
+					<li>
+						<MenuItem item={item} />
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>

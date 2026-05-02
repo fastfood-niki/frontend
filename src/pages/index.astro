@@ -1,11 +1,24 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Container from '../components/common/Container.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import CategoryTabs from '../components/menu/CategoryTabs.astro';
+import MenuCategory from '../components/menu/MenuCategory.astro';
+import { menuCategories } from '../data/menu';
 ---
 
 <Layout>
-	<Welcome />
+	<Header />
+	<CategoryTabs categories={menuCategories} />
+	<main id="menu" class="relative z-0 outline-none">
+		<Container class="py-8 sm:py-10 md:py-12">
+			<div
+				class="columns-1 gap-x-0 md:columns-2 md:gap-x-8 lg:gap-x-10 [&>*]:break-inside-avoid"
+			>
+				{menuCategories.map((category) => <MenuCategory category={category} />)}
+			</div>
+		</Container>
+	</main>
+	<Footer />
 </Layout>

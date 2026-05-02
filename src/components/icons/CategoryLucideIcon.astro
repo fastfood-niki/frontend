@@ -1,0 +1,36 @@
+---
+import { categoryLucideIcons, type CategoryIconId } from '../../data/categoryIcons';
+import { lucideIconToSvg } from '../../lib/lucide-ssr';
+
+interface Props {
+	categoryId: string;
+	variant?: 'tab' | 'section';
+}
+
+const { categoryId, variant = 'tab' } = Astro.props;
+
+const id = categoryId as CategoryIconId;
+const nodes = id in categoryLucideIcons ? categoryLucideIcons[id] : null;
+
+const size = variant === 'section' ? 22 : 18;
+const svgClass =
+	variant === 'section'
+		? 'h-[22px] w-[22px] shrink-0 text-amber-400'
+		: 'h-[18px] w-[18px] shrink-0 text-amber-400';
+
+const svg = nodes ? lucideIconToSvg(nodes, { size, class: svgClass }) : '';
+
+const outerTab = 'inline-flex items-center justify-center';
+const outerSection =
+	'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/10 ring-1 ring-amber-500/30 shadow-[0_0_16px_-4px_rgba(251,191,36,0.28)]';
+---
+
+{
+	svg && (
+		<span
+			class:list={[variant === 'section' ? outerSection : outerTab]}
+			aria-hidden="true"
+			set:html={svg}
+		/>
+	)
+}

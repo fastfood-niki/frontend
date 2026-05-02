@@ -9,9 +9,16 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky"
   },
   "dependencies": {
-    "astro": "^6.2.1"
+    "@tailwindcss/vite": "^4.2.4",
+    "astro": "^6.2.1",
+    "lucide": "^1.14.0",
+    "tailwindcss": "^4.2.4"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
   }
 }
