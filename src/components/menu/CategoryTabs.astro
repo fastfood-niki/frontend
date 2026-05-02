@@ -38,57 +38,6 @@ const { categories } = Astro.props;
 </nav>
 
 <script>
-	function clearCategorySelection() {
-		document.querySelectorAll('.category-tab--active').forEach((el) => el.classList.remove('category-tab--active'));
-		document
-			.querySelectorAll('.category-section-card--active')
-			.forEach((el) => el.classList.remove('category-section-card--active'));
-		document.querySelectorAll('[data-category-tab]').forEach((el) => el.removeAttribute('aria-current'));
-	}
-
-	function applyCategorySelection(id) {
-		if (!id) {
-			clearCategorySelection();
-			return;
-		}
-
-		const tab = document.querySelector(
-			`[data-category-tab][data-category-id="${CSS.escape(id)}"]`,
-		);
-		const section = document.getElementById(id);
-		const card = section?.querySelector('[data-category-section]');
-
-		if (!tab || !card) {
-			clearCategorySelection();
-			return;
-		}
-
-		clearCategorySelection();
-		tab.classList.add('category-tab--active');
-		card.classList.add('category-section-card--active');
-		tab.setAttribute('aria-current', 'true');
-	}
-
-	function syncCategoryFromHash() {
-		applyCategorySelection(window.location.hash.replace(/^#/, '').trim());
-	}
-
-	function initCategoryHighlight() {
-		syncCategoryFromHash();
-		window.addEventListener('hashchange', syncCategoryFromHash);
-
-		document.querySelectorAll('[data-category-tab]').forEach((el) => {
-			el.addEventListener('click', () => {
-				const cid = el.getAttribute('data-category-id');
-				if (!cid) return;
-				requestAnimationFrame(() => applyCategorySelection(cid));
-			});
-		});
-	}
-
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initCategoryHighlight);
-	} else {
-		initCategoryHighlight();
-	}
+	import { setupCategoryHighlight } from '../../scripts/category-highlight-client';
+	setupCategoryHighlight();
 </script>

@@ -9,7 +9,7 @@ interface Props {
 	class?: string;
 }
 
-const { title, categoryId, as: Tag = 'h2', id, class: className } = Astro.props;
+const { title, categoryId, as: Tag = 'h2', id, class: className }: Props = Astro.props;
 ---
 
 <Tag
