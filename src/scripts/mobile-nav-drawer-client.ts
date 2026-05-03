@@ -6,18 +6,36 @@ export function initMobileNavDrawer(): void {
 	const drawer = document.getElementById('mobile-nav-drawer');
 	const mq = typeof window !== 'undefined' ? window.matchMedia('(min-width: 768px)') : null;
 
+	/** Bumped on each toggle so deferred scroll-lock never runs after a fast close. */
+	let scrollLockGeneration = 0;
+
 	function setOpen(isOpen: boolean): void {
 		if (!root || !drawer || !openBtn) return;
-		root.classList.toggle('mobile-nav--open', isOpen);
-		root.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-		openBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-		document.documentElement.classList.toggle('mobile-nav-drawer-open', isOpen);
-		document.body.classList.toggle('mobile-nav-drawer-open', isOpen);
+		scrollLockGeneration++;
 
 		if (isOpen) {
+			const gen = scrollLockGeneration;
+			root.classList.add('mobile-nav--open');
+			root.setAttribute('aria-hidden', 'false');
+			openBtn.setAttribute('aria-expanded', 'true');
 			drawer.removeAttribute('inert');
-			window.setTimeout(() => closeBtn?.focus(), 10);
+			// Defer overflow lock to the next frames so the compositor can start the transform
+			// before a full-document layout from html/body overflow (reduces jank on mobile).
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					if (gen !== scrollLockGeneration) return;
+					if (!root.classList.contains('mobile-nav--open')) return;
+					document.documentElement.classList.add('mobile-nav-drawer-open');
+					document.body.classList.add('mobile-nav-drawer-open');
+				});
+			});
+			window.setTimeout(() => closeBtn?.focus(), 420);
 		} else {
+			document.documentElement.classList.remove('mobile-nav-drawer-open');
+			document.body.classList.remove('mobile-nav-drawer-open');
+			root.classList.remove('mobile-nav--open');
+			root.setAttribute('aria-hidden', 'true');
+			openBtn.setAttribute('aria-expanded', 'false');
 			drawer.setAttribute('inert', '');
 			openBtn.focus();
 		}

@@ -9,6 +9,8 @@
 }
 
 :root {
+	--mobile-drawer-dur: 0.6s;
+	--mobile-drawer-ease: cubic-bezier(0.33, 0.02, 0.2, 1);
 	--sticky-category-h: 4.75rem;
 	--anchor-offset: calc(var(--sticky-category-h) + 1rem);
 	--hero-delivery-balance-nudge: 0.7rem;
@@ -357,15 +359,15 @@
 		opacity: 0;
 		visibility: hidden;
 		transition:
-			opacity 0.38s cubic-bezier(0.22, 1, 0.32, 1),
-			visibility 0s linear 0.38s;
+			opacity var(--mobile-drawer-dur) var(--mobile-drawer-ease),
+			visibility 0s linear var(--mobile-drawer-dur);
 	}
 
 	.mobile-nav-drawer-root.mobile-nav--open .mobile-nav-drawer-backdrop {
 		opacity: 1;
 		visibility: visible;
 		transition:
-			opacity 0.38s cubic-bezier(0.22, 1, 0.32, 1),
+			opacity var(--mobile-drawer-dur) var(--mobile-drawer-ease),
 			visibility 0s linear 0s;
 	}
 
@@ -374,7 +376,8 @@
 		transform: translate3d(100%, 0, 0);
 		backface-visibility: hidden;
 		-webkit-backface-visibility: hidden;
-		transition: transform 0.38s cubic-bezier(0.22, 1, 0.32, 1);
+		will-change: transform;
+		transition: transform var(--mobile-drawer-dur) var(--mobile-drawer-ease);
 	}
 
 	.mobile-nav-drawer-root.mobile-nav--open .mobile-nav-drawer-panel {
@@ -385,6 +388,7 @@
 		.mobile-nav-drawer-backdrop,
 		.mobile-nav-drawer-panel {
 			transition-duration: 0.01ms;
+			will-change: auto;
 		}
 	}
 }
