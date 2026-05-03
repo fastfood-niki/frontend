@@ -1,8 +1,13 @@
 ---
 import Container from '../common/Container.astro';
 import { restaurant } from '../../data/restaurant';
+import { appleMapsUrl, googleMapsUrl, openStreetMapEmbedUrl } from '../../lib/maps';
 
 const year = new Date().getFullYear();
+const coords = restaurant.coordinates;
+const embedUrl = coords ? openStreetMapEmbedUrl(coords.lat, coords.lng) : null;
+const googleUrl = coords ? googleMapsUrl(coords.lat, coords.lng) : '';
+const appleUrl = coords ? appleMapsUrl(coords.lat, coords.lng, restaurant.name) : '';
 ---
 
 <footer
@@ -21,6 +26,43 @@ const year = new Date().getFullYear();
 				{restaurant.phone}
 			</a>
 		</div>
+
+		{
+			coords && embedUrl && (
+				<div class="mx-auto mt-12 w-full max-w-2xl">
+					<div class="overflow-hidden rounded-xl border border-amber-900/35 bg-zinc-900/40 shadow-lg shadow-black/30 ring-1 ring-white/[0.04]">
+						<div class="aspect-[16/10] w-full md:aspect-[2/1]">
+							<iframe
+								title={`Harta — ${restaurant.name}`}
+								class="h-full w-full border-0"
+								src={embedUrl}
+								loading="lazy"
+								referrerpolicy="no-referrer-when-downgrade"
+							/>
+						</div>
+					</div>
+					<div class="mt-4 flex w-full flex-col gap-3 md:flex-row md:items-center md:justify-between">
+						<a
+							href={googleUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex min-h-[2.75rem] flex-1 items-center justify-center rounded-full border border-amber-600/30 bg-zinc-900/60 px-5 py-2.5 text-sm font-semibold text-amber-200 transition hover:border-amber-500/50 hover:bg-amber-500/10 hover:text-amber-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 md:flex-none md:min-w-[11rem]"
+						>
+							Hap në Google Maps
+						</a>
+						<a
+							href={appleUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex min-h-[2.75rem] flex-1 items-center justify-center rounded-full border border-amber-600/30 bg-zinc-900/60 px-5 py-2.5 text-sm font-semibold text-amber-200 transition hover:border-amber-500/50 hover:bg-amber-500/10 hover:text-amber-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 md:flex-none md:min-w-[11rem]"
+						>
+							Hap në Apple Maps
+						</a>
+					</div>
+				</div>
+			)
+		}
+
 		<p class="mt-10 text-center text-xs text-zinc-600">
 			© {year}
 			{restaurant.name}

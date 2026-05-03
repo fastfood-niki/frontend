@@ -31,6 +31,15 @@ const jsonLd = {
 	url: canonicalURL.href,
 	image: ogImageURL.href,
 	servesCuisine: 'Fast food',
+	...(r.coordinates
+		? {
+				geo: {
+					'@type': 'GeoCoordinates',
+					latitude: r.coordinates.lat,
+					longitude: r.coordinates.lng,
+				},
+			}
+		: {}),
 };
 ---
 
