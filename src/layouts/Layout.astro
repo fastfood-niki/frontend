@@ -1,4 +1,5 @@
 ---
+import Analytics from '@vercel/analytics/astro';
 import '../styles/global.css';
 import MobileNavDrawer from '../components/layout/MobileNavDrawer.astro';
 import { restaurant as defaultRestaurant, type RestaurantInfo } from '../data/restaurant';
@@ -45,5 +46,6 @@ const pageTitle = title ?? `${r.name} · Menyja`;
 		</a>
 		<slot />
 		<MobileNavDrawer />
+		<Analytics />
 	</body>
 </html>
