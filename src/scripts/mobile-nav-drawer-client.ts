@@ -6,7 +6,6 @@ export function initMobileNavDrawer(): void {
 	const drawer = document.getElementById('mobile-nav-drawer');
 	const mq = typeof window !== 'undefined' ? window.matchMedia('(min-width: 768px)') : null;
 
-	/** Bumped on each toggle so deferred scroll-lock never runs after a fast close. */
 	let scrollLockGeneration = 0;
 
 	function setOpen(isOpen: boolean): void {
@@ -19,8 +18,7 @@ export function initMobileNavDrawer(): void {
 			root.setAttribute('aria-hidden', 'false');
 			openBtn.setAttribute('aria-expanded', 'true');
 			drawer.removeAttribute('inert');
-			// Defer overflow lock to the next frames so the compositor can start the transform
-			// before a full-document layout from html/body overflow (reduces jank on mobile).
+			// TODO(mobile-drawer): Keep scroll-lock on html/body deferred (double rAF) after opening — same-frame overflow lock forces reflow and visible jank on phones.
 			requestAnimationFrame(() => {
 				requestAnimationFrame(() => {
 					if (gen !== scrollLockGeneration) return;
