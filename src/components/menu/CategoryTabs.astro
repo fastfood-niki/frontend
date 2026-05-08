@@ -11,7 +11,8 @@ const { categories } = Astro.props;
 ---
 
 <nav
-	class="sticky top-0 z-[90] w-full min-w-0 max-w-full overflow-x-clip border-b border-red-950/55 bg-black/95 shadow-[0_12px_40px_-8px_rgba(0,0,0,0.9)]"
+	id="menu-tabs"
+	class="sticky top-0 z-90 w-full min-w-0 max-w-full overflow-x-clip border-b border-red-950/55 bg-black/95 shadow-[0_12px_40px_-8px_rgba(0,0,0,0.9)]"
 	aria-label="Kategoritë e menusë"
 >
 	<Container
@@ -25,7 +26,7 @@ const { categories } = Astro.props;
 							href={`#${cat.id}`}
 							data-category-tab
 							data-category-id={cat.id}
-							class="category-tab inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-red-900/40 bg-gradient-to-b from-zinc-900 to-black px-4 py-2 text-sm font-medium text-zinc-100 shadow-sm ring-1 ring-red-500/[0.16] transition-[border-color,box-shadow,background-color,color,transform] duration-200 hover:border-red-600/60 hover:from-red-950 hover:to-black hover:text-yellow-100 hover:shadow-md hover:shadow-red-950/35 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400 active:scale-[0.98]"
+							class="category-tab inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-red-900/40 bg-linear-to-b from-zinc-900 to-black px-4 py-2 text-sm font-medium text-zinc-100 shadow-sm ring-1 ring-red-500/16 transition-[border-color,box-shadow,background-color,color,transform] duration-200 hover:border-red-600/60 hover:from-red-950 hover:to-black hover:text-yellow-100 hover:shadow-md hover:shadow-red-950/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400 active:scale-[0.98]"
 						>
 							<CategoryLucideIcon categoryId={cat.id} variant="tab" />
 							<span class="whitespace-nowrap">{cat.title}</span>

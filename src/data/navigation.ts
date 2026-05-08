@@ -3,4 +3,4 @@ export interface NavItem {
 	href: string;
 }
 
-export const mainNavItems: NavItem[] = [{ label: 'Menyja', href: '#menu' }];
+export const mainNavItems: NavItem[] = [{ label: 'Menyja', href: '#menu-tabs' }];
