@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { mainNavItems } from '../../data/navigation';
 import { restaurant } from '../../data/restaurant';
 
@@ -33,7 +34,7 @@ const menuLabel = mainNavItems[0]?.label ?? 'Menyja';
 			>
 				<div class="min-w-0 flex-1">
 					<p id="mobile-nav-drawer-title" class="sr-only">{restaurant.name}</p>
-					<img
+					<Image
 						src="/logo-niki-512.png"
 						alt=""
 						aria-hidden="true"
