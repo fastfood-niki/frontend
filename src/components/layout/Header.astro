@@ -7,24 +7,30 @@ import { lucideIconToSvg } from '../../lib/lucide-ssr';
 
 const deliveryIconHero = lucideIconToSvg(Bike, {
 	size: 24,
-	class: 'h-6 w-6 text-amber-300',
+	class: 'h-6 w-6 text-yellow-300',
 });
 ---
 
 <header class="relative">
 	<div
-		class="relative z-10 w-full border-b border-amber-950/40 bg-zinc-950 shadow-sm shadow-black/20"
+		class="relative z-10 w-full border-b border-red-950/50 bg-black/95 shadow-sm shadow-black/35"
 	>
 		<Container class="flex h-14 items-center gap-3 sm:h-16 sm:gap-6">
 			<a
 				href="/"
-				class="group max-w-[42%] shrink-0 truncate font-display text-base font-semibold tracking-tight text-amber-100/95 transition-colors hover:text-amber-50 focus-visible:rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 sm:max-w-none sm:text-lg"
+				aria-label={restaurant.name}
+				class="group max-w-[48%] shrink-0 focus-visible:rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400 sm:max-w-none"
 			>
-				<span
-					class="bg-gradient-to-r from-amber-200 via-amber-100 to-amber-300 bg-clip-text text-transparent group-hover:from-amber-100 group-hover:via-white group-hover:to-amber-200"
-				>
-					{restaurant.name}
-				</span>
+				<img
+					src="/logo-niki-512.png"
+					alt=""
+					aria-hidden="true"
+					width="512"
+					height="249"
+					class="h-9 w-auto drop-shadow-[0_2px_10px_rgba(255,59,32,0.24)] transition-opacity duration-200 group-hover:opacity-90 sm:h-10"
+					loading="eager"
+					decoding="async"
+				/>
 			</a>
 			<div class="flex min-w-0 flex-1 items-center justify-end md:justify-center">
 				<MainNav />
@@ -32,7 +38,7 @@ const deliveryIconHero = lucideIconToSvg(Bike, {
 			<a
 				href={restaurant.phoneHref}
 				aria-label={`Call ${restaurant.phone}`}
-				class="inline-flex h-10 shrink-0 items-center justify-center rounded-full border border-amber-600/25 bg-amber-500/10 px-3 text-xs font-semibold text-amber-300 transition hover:border-amber-500/45 hover:bg-amber-500/15 hover:text-amber-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 sm:px-4 sm:text-sm"
+				class="inline-flex h-10 shrink-0 items-center justify-center rounded-full border border-red-700/35 bg-red-600/10 px-3 text-xs font-semibold text-yellow-300 transition hover:border-red-500/60 hover:bg-red-500/20 hover:text-yellow-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400 sm:px-4 sm:text-sm"
 			>
 				<span class="hidden sm:inline">{restaurant.phone}</span>
 				<svg
@@ -54,43 +60,45 @@ const deliveryIconHero = lucideIconToSvg(Bike, {
 	</div>
 
 	<div
-		class="relative overflow-hidden border-b border-amber-950/30 bg-gradient-to-b from-zinc-950 via-zinc-950 to-zinc-900/80 pb-12 pt-6 sm:pb-16 sm:pt-8"
+		class="relative overflow-hidden border-b border-red-950/45 bg-gradient-to-b from-black via-zinc-950 to-zinc-900 pb-12 pt-6 sm:pb-16 sm:pt-8"
 	>
 		<div class="pointer-events-none absolute inset-0 opacity-[0.35]" aria-hidden="true">
 			<div
-				class="absolute inset-0 bg-[linear-gradient(to_right,rgba(245,158,11,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(245,158,11,0.03)_1px,transparent_1px)] bg-[size:48px_48px]"
+			class="absolute inset-0 bg-[linear-gradient(to_right,rgba(220,38,38,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(220,38,38,0.08)_1px,transparent_1px)] bg-[size:48px_48px]"
 			>
 			</div>
 			<div
-				class="absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_50%_-15%,rgba(251,191,36,0.18),transparent_55%)]"
+			class="absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_50%_-15%,rgba(255,59,32,0.2),transparent_58%)]"
 			>
 			</div>
 		</div>
 		<div
-			class="pointer-events-none absolute -left-24 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-amber-500/10 blur-3xl sm:left-10"
+			class="pointer-events-none absolute -left-24 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-red-500/15 blur-3xl sm:left-10"
 			aria-hidden="true"
 		>
 		</div>
 		<div
-			class="pointer-events-none absolute -right-24 top-1/4 h-56 w-56 rounded-full bg-amber-600/10 blur-3xl sm:right-16"
+			class="pointer-events-none absolute -right-24 top-1/4 h-56 w-56 rounded-full bg-yellow-500/10 blur-3xl sm:right-16"
 			aria-hidden="true"
 		>
 		</div>
 
 		<Container class="relative z-20 mx-auto max-w-6xl px-4 pt-14 text-center sm:px-6 sm:pt-16 lg:px-8">
-			<h1
-				class="font-display text-[clamp(2rem,6vw,3.75rem)] font-semibold leading-[1.08] tracking-tight text-white"
-			>
-				<span
-					class="bg-gradient-to-br from-amber-50 via-amber-200 to-amber-500 bg-clip-text text-transparent drop-shadow-sm"
-				>
-					{restaurant.name}
-				</span>
-			</h1>
+			<h1 class="sr-only">{restaurant.name}</h1>
+			<img
+				src="/logo-niki-transparent.png"
+				alt=""
+				aria-hidden="true"
+				width="1729"
+				height="841"
+				class="mx-auto w-full max-w-[min(34rem,76vw)] sm:max-w-[min(36rem,72vw)] lg:max-w-[31rem] drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
+				loading="eager"
+				decoding="async"
+			/>
 			<p
-				class="mx-auto mt-5 max-w-xl text-base font-medium leading-relaxed text-amber-200/85 sm:text-lg sm:leading-relaxed"
+				class="mx-auto mt-5 max-w-xl text-base font-medium leading-relaxed text-yellow-100/85 sm:text-lg sm:leading-relaxed"
 			>
-				<span class="font-display italic text-amber-100/90">{restaurant.tagline}</span>
+				<span class="font-display italic text-yellow-100/90">{restaurant.tagline}</span>
 			</p>
 
 			<div
