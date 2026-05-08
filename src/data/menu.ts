@@ -128,13 +128,11 @@ export const menuCategories: MenuCategory[] = [
 		items: [
 			{
 				name: 'Meze e Ftohtë',
-				price: '10 € – 15 €',
-				description: 'Varësisht përzgjedhjes',
+				price: '10 € – 15 €'
 			},
 			{
 				name: 'Meze e Nxehtë',
-				price: '10 € – 15 €',
-				description: 'Varësisht përzgjedhjes',
+				price: '10 € – 15 €'
 			},
 			{
 				name: 'Chicken Fingers',
