@@ -33,12 +33,14 @@ function syncCategoryFromHash(): void {
 
 function initCategoryHighlight(): void {
 	syncCategoryFromHash();
-	window.addEventListener('hashchange', syncCategoryFromHash);
 
 	document.querySelectorAll('[data-category-tab]').forEach((el) => {
-		el.addEventListener('click', () => {
+		el.addEventListener('click', (event) => {
 			const cid = el.getAttribute('data-category-id');
 			if (!cid) return;
+			event.preventDefault();
+			const section = document.getElementById(cid);
+			section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 			requestAnimationFrame(() => applyCategorySelection(cid));
 		});
 	});
