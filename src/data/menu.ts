@@ -99,7 +99,7 @@ export const menuCategories: MenuCategory[] = [
 			{ name: 'Pizza Peperoni', price: '3.50 €' },
 			{
 				name: 'Pizza Shtëpie NIKI',
-				price: '4.00 €',
+				price: '3.50 €',
 				badge: 'Popular',
 			},
 			{ name: 'Pizza Tuna', price: '4.00 €' },
